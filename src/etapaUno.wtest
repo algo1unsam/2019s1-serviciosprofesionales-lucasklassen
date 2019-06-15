@@ -28,6 +28,6 @@ describe "Etapa 1"{
 	 }
 	 
 	 test "como universidades formadoras, a las de Rosario, Corrientes y Hurlingham."{
-	 	assert.equals([rosario,corrientes,hurlingham],unaEmpresa.universidadesFormadoras())
+	 	assert.equals(#{rosario,corrientes,hurlingham},unaEmpresa.universidadesFormadoras())
 	 }
 }
