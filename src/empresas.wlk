@@ -32,8 +32,22 @@ class Empresa{
 	}
 	method cantidadClientes()=clientes.size()
 	method tieneClienteA(solicitante)=clientes.contains(solicitante)
-	method esPocoAtractivo(profesional) = 
+	method esPocoAtractivo(unProfesional){
+		return not (self.generarListaConOtrosProfesionales(unProfesional).isEmpty()) 
+		and self.hayOtroProfesionalMasBarato(unProfesional,self.generarListaConOtrosProfesionales(unProfesional))
+		
+	}
+	method generarListaConOtrosProfesionales(unProfesional){
+		return profesionales.filter{profesional => not profesional.provinciasDondePuedeTrabajar().asSet()
+		.intersection(unProfesional.provinciasDondePuedeTrabajar().asSet()).isEmpty()}
+	}
+	method hayOtroProfesionalMasBarato(unProfesional,coleccionProfesionales){
+		return coleccionProfesionales.any{ profesional => 
+		profesional.honorariosPorHora()<unProfesional.honorariosPorHora()}
+	}
+	
 }
+
 
 object asociacionDeProfesionalesDelLitoral{
 	var cantidadAcumulada=0

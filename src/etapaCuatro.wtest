@@ -1,12 +1,12 @@
 import profesionales.*
 import universidades.*
 import empresas.*
-import solicitante.*
+import solicitantes.*
 
 describe "Etapa 4"{
 	
-	const sanMartin = new Universidad(provincia="Buenos Aires",honorarios=3500)
-	const rosario = new Universidad(provincia="Santa Fe",honorarios=2800)
+	const sanMartin = new Universidad(provincia=["Buenos Aires"],honorarios=3500)
+	const rosario = new Universidad(provincia=["Santa Fe"],honorarios=2800)
 	const corrientes = new Universidad(provincia="Corrientes",honorarios=4200)
 	const hurlingham = new Universidad(provincia="Buenos Aires",honorarios=8800)
 	const juana = new ProfesionalVinculado(universidad=rosario)
@@ -16,8 +16,9 @@ describe "Etapa 4"{
 	const unaEmpresa = new Empresa(honorarioDeReferencia=3500,profesionales=[juana,melina,rocio,luciana])
 	const pedro = new Persona(provincia="Cordoba")
 	const jose = new Persona(provincia="Tierra del fuego")
-	const unaInstitucion = new Institucion(universidades=[sanMartin,rosario])
-	const otraInstitucion = new Institucion(universidades=["UTN"])
+	const unAtractivo = new ProfesionalLibre(universidad=hurlingham, honorarios=7000, provincias=["Salta"])
+	const otroAtractivo = new ProfesionalLibre(universidad=hurlingham,honorarios=200,provincias=["Santa Fe"])
+	const unPocoAtractivo = new ProfesionalLibre(universidad=hurlingham,honorarios=20000,provincias=["Santa Fe"])
 	
 	test"unaEmpresa no puede dar servicio a jose y tira error"{
 		assert.throwsException({unaEmpresa.darServicio(jose)})
@@ -29,6 +30,18 @@ describe "Etapa 4"{
 		assert.that(unaEmpresa.tieneClienteA(pedro))
 		assert.equals(1,unaEmpresa.cantidadClientes())
 	}	
+	
+	test "unAtractivo no es poco atractivo para unaEmpresa"{
+		assert.notThat(unaEmpresa.esPocoAtractivo(unAtractivo))
+	}
 
-
+	test "otroAtractivo no es poco atractivo para unaEmpresa"{
+		assert.notThat(unaEmpresa.esPocoAtractivo(otroAtractivo))
+	}
+	
+	test "unPocoAtractivo es poco atractivo para unaEmpresa"{
+		assert.that(unaEmpresa.esPocoAtractivo(unPocoAtractivo))
+	}
+	
+	
 }

@@ -1,7 +1,7 @@
 import profesionales.*
 import universidades.*
 import empresas.*
-import solicitante.*
+import solicitantes.*
 
 describe "Etapa 3"{
 	
