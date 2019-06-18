@@ -39,20 +39,7 @@ class Empresa{
 		return profesionales.any{profesional =>profesional.podesTrabajarEn(provincia) 
 		and profesional.cobrasMasBaratoQue(unProfesional)}
 	}
-	/*method esPocoAtractivo(unProfesional){
-		var otrosProfesionales = self.destinadosAlMismoLugar(unProfesional)
-		return not (otrosProfesionales.isEmpty()) 
-		and self.hayOtroProfesionalMasBarato(unProfesional,otrosProfesionales)
-		
-	}*/
-	/*method destinadosAlMismoLugar(unProfesional){
-		return profesionales.filter{profesional => not profesional.provinciasDondePuedeTrabajar().asSet()
-		.intersection(unProfesional.provinciasDondePuedeTrabajar().asSet()).isEmpty()}
-	}*/
-	/*method hayOtroProfesionalMasBarato(unProfesional,coleccionProfesionales){
-		return coleccionProfesionales.any{ profesional => 
-		profesional.honorariosPorHora()<unProfesional.honorariosPorHora()}
-	}*/
+	
 	
 }
 
