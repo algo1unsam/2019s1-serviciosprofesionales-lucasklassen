@@ -16,7 +16,7 @@ describe "Etapa 4"{
 	const unaEmpresa = new Empresa(honorarioDeReferencia=3500,profesionales=[juana,melina,rocio,luciana])
 	const pedro = new Persona(provincia="Cordoba")
 	const jose = new Persona(provincia="Tierra del fuego")
-	const unAtractivo = new ProfesionalLibre(universidad=hurlingham, honorarios=7000, provincias=["Salta"])
+	const unAtractivo = new ProfesionalLibre(universidad=hurlingham, honorarios=7000, provincias=["Salta","p"])
 	const otroAtractivo = new ProfesionalLibre(universidad=hurlingham,honorarios=200,provincias=["Santa Fe"])
 	const unPocoAtractivo = new ProfesionalLibre(universidad=hurlingham,honorarios=20000,provincias=["Santa Fe"])
 	

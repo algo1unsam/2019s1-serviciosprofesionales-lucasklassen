@@ -1,0 +1,33 @@
+import profesionales.*
+import universidades.*
+import empresas.*
+
+describe "Etapa 1"{
+	
+	const sanMartin = new Universidad(provincia="Buenos Aires",honorarios=3500)
+	const rosario = new Universidad(provincia="Santa Fe",honorarios=2800)
+	const corrientes = new Universidad(provincia="Corrientes",honorarios=4200)
+	const hurlingham = new Universidad(provincia="Buenos Aires",honorarios=8800)
+	const juana = new ProfesionalVinculado(universidad=rosario)
+	const melina = new ProfesionalAsociado(universidad=corrientes)
+	const rocio = new ProfesionalLibre(universidad=hurlingham, honorarios=5000, provincias=["Santa Fe", "Cordoba","Buenos Aires"])
+	const luciana = new ProfesionalLibre(universidad=rosario,honorarios=3200, provincias=["Santa Fe", "Entre Rios"])
+	const unaEmpresa = new Empresa(honorarioDeReferencia=3500,profesionales=[juana,melina,rocio,luciana])
+	
+	test"dos de sus profesionales estudiaron en Rosario, 
+	uno en Hurlingham, ninguno (o sea cero) en San Martín."{
+		assert.equals(2,unaEmpresa.cantidadProfesionalesSegunUniversidad(rosario))
+		assert.equals(1,unaEmpresa.cantidadProfesionalesSegunUniversidad(hurlingham))
+		assert.equals(0,unaEmpresa.cantidadProfesionalesSegunUniversidad(sanMartin))
+	}
+	
+	test "como profesionales caros, solamente a Rocío. ¡OJO! el método no va a 
+	devolver a Rocío, va a devolver una colección que tiene un solo elemento,
+	 que es Rocío."{
+	 	assert.equals([rocio],unaEmpresa.profesionalesCaros())
+	 }
+	 
+	 test "como universidades formadoras, a las de Rosario, Corrientes y Hurlingham."{
+	 	assert.equals(#{rosario,corrientes,hurlingham},unaEmpresa.universidadesFormadoras())
+	 }
+}

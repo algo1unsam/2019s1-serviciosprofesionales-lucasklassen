@@ -1,0 +1,47 @@
+import profesionales.*
+import universidades.*
+import empresas.*
+import solicitantes.*
+
+describe "Etapa 4"{
+	
+	const sanMartin = new Universidad(provincia=["Buenos Aires"],honorarios=3500)
+	const rosario = new Universidad(provincia=["Santa Fe"],honorarios=2800)
+	const corrientes = new Universidad(provincia="Corrientes",honorarios=4200)
+	const hurlingham = new Universidad(provincia="Buenos Aires",honorarios=8800)
+	const juana = new ProfesionalVinculado(universidad=rosario)
+	const melina = new ProfesionalAsociado(universidad=corrientes)
+	const rocio = new ProfesionalLibre(universidad=hurlingham, honorarios=5000, provincias=["Santa Fe", "Cordoba","Buenos Aires"])
+	const luciana = new ProfesionalLibre(universidad=rosario,honorarios=3200, provincias=["Santa Fe", "Entre Rios"])
+	const unaEmpresa = new Empresa(honorarioDeReferencia=3500,profesionales=[juana,melina,rocio,luciana])
+	const pedro = new Persona(provincia="Cordoba")
+	const jose = new Persona(provincia="Tierra del fuego")
+	const unAtractivo = new ProfesionalLibre(universidad=hurlingham, honorarios=7000, provincias=["Salta","p"])
+	const otroAtractivo = new ProfesionalLibre(universidad=hurlingham,honorarios=200,provincias=["Santa Fe"])
+	const unPocoAtractivo = new ProfesionalLibre(universidad=hurlingham,honorarios=20000,provincias=["Santa Fe"])
+	
+	test"unaEmpresa no puede dar servicio a jose y tira error"{
+		assert.throwsException({unaEmpresa.darServicio(jose)})
+	}
+	
+	test"rocio cobra su honorario y solicitante es agregadoa cliente"{
+		unaEmpresa.darServicio(pedro)
+		assert.equals(5000,rocio.cantidadAcumulada())
+		assert.that(unaEmpresa.tieneClienteA(pedro))
+		assert.equals(1,unaEmpresa.cantidadClientes())
+	}	
+	
+	test "unAtractivo no es poco atractivo para unaEmpresa"{
+		assert.notThat(unaEmpresa.esPocoAtractivo(unAtractivo))
+	}
+
+	test "otroAtractivo no es poco atractivo para unaEmpresa"{
+		assert.notThat(unaEmpresa.esPocoAtractivo(otroAtractivo))
+	}
+	
+	test "unPocoAtractivo es poco atractivo para unaEmpresa"{
+		assert.that(unaEmpresa.esPocoAtractivo(unPocoAtractivo))
+	}
+	
+	
+}
